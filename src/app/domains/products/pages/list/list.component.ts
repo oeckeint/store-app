@@ -13,5 +13,8 @@ import { ProductComponent } from "../../components/product/product.component";
   styleUrl: './list.component.css'
 })
 export class ListComponent {
+  protected fromChild(event: string) {
+    console.log('Evento lanzado en padre', event);
+  }
 
 }
