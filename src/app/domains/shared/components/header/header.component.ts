@@ -1,5 +1,6 @@
 import {Component, inject, Inject, Input, signal, SimpleChange, SimpleChanges} from '@angular/core';
 import {CommonModule} from "@angular/common";
+import { RouterLinkWithHref } from "@angular/router";
 
 import {ProductModel} from "../models/product.model";
 import {CartService} from "../../services/cart.service";
@@ -8,7 +9,8 @@ import {CartService} from "../../services/cart.service";
   selector: 'app-header',
   standalone: true,
   imports: [
-    CommonModule
+    CommonModule,
+    RouterLinkWithHref
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
