@@ -1,5 +1,8 @@
-<div class="grid grid-cols-3 gap-6">
-  @for ( product of products(); track product ) {
-    <app-product [product] = "product" (addToCart)="fromChild($event)"/>
-  }
+<div class="container mx-auto">
+  <app-header [cartProducts]="cartProducts()" />
+  <div class="grid grid-cols-4 gap-6 mt-5">
+    @for ( product of products(); track product ) {
+      <app-product [product]="product" (addToCart)="addProductToCart($event)"/>
+    }
+  </div>
 </div>

@@ -11,13 +11,10 @@ import {ProductModel} from "../../../shared/components/models/product.model";
 export class ProductComponent {
   @Input({required : true}) product! : ProductModel;
 
-  @Output() addToCart = new EventEmitter();
+  @Output()  addToCart = new EventEmitter();
 
   protected addToCartHandler() {
-    console.log('Clicked on add to cart');
-    this.addToCart.emit(
-      'Product added to cart! ' + this.product.title
-    );
+    this.addToCart.emit(this.product);
   }
 
 }

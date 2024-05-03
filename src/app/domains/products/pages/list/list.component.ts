@@ -1,14 +1,17 @@
-import {Component, signal} from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from "@angular/common";
+
 import { ProductComponent } from "../../components/product/product.component";
-import {ProductModel} from "../../../shared/components/models/product.model";
+import { ProductModel } from "../../../shared/components/models/product.model";
+import { HeaderComponent } from "../../../shared/components/header/header.component";
 
 @Component({
   selector: 'app-list',
   standalone: true,
   imports: [
     CommonModule,
-    ProductComponent
+    ProductComponent,
+    HeaderComponent
   ],
   templateUrl: './list.component.html',
   styleUrl: './list.component.css'
@@ -16,6 +19,7 @@ import {ProductModel} from "../../../shared/components/models/product.model";
 export class ListComponent {
 
   protected products = signal<ProductModel[]>([])
+  protected cartProducts = signal<ProductModel[]>([])
 
   constructor() {
     const initialProducts : ProductModel[] = [
@@ -39,6 +43,27 @@ export class ListComponent {
         price: 300,
         image: 'https://picsum.photos/640/640?r=25',
         creationAt: new Date().toISOString()
+      },
+      {
+        id: Date.now(),
+        title: 'Producto 4',
+        price: 100,
+        image: 'https://picsum.photos/640/640?r=26',
+        creationAt: new Date().toISOString()
+      },
+      {
+        id: Date.now(),
+        title: 'Producto 5',
+        price: 200,
+        image: 'https://picsum.photos/640/640?r=27',
+        creationAt: new Date().toISOString()
+      },
+      {
+        id: Date.now(),
+        title: 'Producto 6',
+        price: 300,
+        image: 'https://picsum.photos/640/640?r=28',
+        creationAt: new Date().toISOString()
       }
     ];
 
@@ -46,8 +71,11 @@ export class ListComponent {
 
   }
 
-  protected fromChild(event: string) {
-    console.log('Evento lanzado en padre', event);
+  protected addProductToCart(newProduct: ProductModel) {
+    this.cartProducts.update(
+      (cartProducts) => {
+                  return [newProduct, ...cartProducts];
+                });
   }
 
 }
