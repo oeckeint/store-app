@@ -1,9 +1,10 @@
-import { Component, signal } from '@angular/core';
+import {Component, inject, Inject, signal} from '@angular/core';
 import { CommonModule } from "@angular/common";
 
 import { ProductComponent } from "../../components/product/product.component";
 import { ProductModel } from "../../../shared/components/models/product.model";
 import { HeaderComponent } from "../../../shared/components/header/header.component";
+import {CartService} from "../../../shared/services/cart.service";
 
 @Component({
   selector: 'app-list',
@@ -19,7 +20,7 @@ import { HeaderComponent } from "../../../shared/components/header/header.compon
 export class ListComponent {
 
   protected products = signal<ProductModel[]>([])
-  protected cartProducts = signal<ProductModel[]>([])
+  private cartService = inject(CartService);
 
   constructor() {
     const initialProducts : ProductModel[] = [
@@ -72,10 +73,7 @@ export class ListComponent {
   }
 
   protected addProductToCart(newProduct: ProductModel) {
-    this.cartProducts.update(
-      (cartProducts) => {
-                  return [newProduct, ...cartProducts];
-                });
+    this.cartService.addNewProductToCart(newProduct);
   }
 
 }

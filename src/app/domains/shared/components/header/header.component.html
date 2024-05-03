@@ -40,7 +40,7 @@
     </div>
     <div class="flex items-center">
       <button class="p-2 border rounded relative" (click)="toggleSideMenu()">
-        <div class="absolute -top-2 -left-2 rounded h-5 w-5 bg-black text-white text-xs">{{ cartProducts.length }}</div>
+        <div class="absolute -top-2 -left-2 rounded h-5 w-5 bg-black text-white text-xs">{{ cartProducts().length }}</div>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -65,8 +65,8 @@
 >
 <div class="flex justify-between items-center">
   <p class="text-xl">My Cart
-    @if (cartProducts.length != 0) {
-      <span class="rounded bg-black p-0.5 text-white text-">{{ cartProducts.length }}</span>
+    @if (cartProducts().length != 0) {
+      <span class="rounded bg-black p-0.5 text-white text-">{{ cartProducts().length }}</span>
     }
   </p>
   <button (click)="toggleSideMenu()">
@@ -86,13 +86,13 @@
     </svg>
   </button>
 </div>
-  @if (cartProducts.length === 0) {
+  @if (cartProducts().length === 0) {
     <p>Your cart is empty</p>
   } @else {
     <hr>
-    <p>Total: $ {{ totalPrice() }}</p>
+    <p>Total: $ {{ cartTotalPrice() }}</p>
     <hr>
-    @for ( cartProduct of cartProducts ; track cartProduct ) {
+    @for ( cartProduct of cartProducts() ; track cartProduct ) {
       <p>{{ cartProduct.title }} - $ {{ cartProduct.price }}</p>
       <hr>
     }
